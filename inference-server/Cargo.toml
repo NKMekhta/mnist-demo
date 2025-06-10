@@ -1,0 +1,12 @@
+[package]
+name = "inference-server"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+tokio = { workspace = true, features = ["rt", "rt-multi-thread", "net", "full"] }
+burn = { workspace = true }
+training-pipeline = { path = "../training-pipeline" }
+tokio-tungstenite = "0.26.2"
+futures-util = "0.3.31"
+futures-channel = "0.3.31"

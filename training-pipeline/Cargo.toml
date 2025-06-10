@@ -1,0 +1,19 @@
+[package]
+name = "training-pipeline"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+rand = { workspace = true }
+
+[dependencies.burn]
+workspace = true
+features = ["wgpu", "train", "vision"]
+
+[lib]
+name = "training_lib"
+path = "src/lib.rs"
+
+[[bin]]
+name = "train-model"
+path = "src/main.rs"
