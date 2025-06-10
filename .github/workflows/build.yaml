@@ -17,6 +17,7 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - uses: docker/metadata-action@v4
+        id: meta
         with:
           images: ghcr.io/${{ github.repository }}
           tags: latest
@@ -25,3 +26,4 @@ jobs:
         with:
           context: .
           push: true
+          tags: ${{ steps.meta.outputs.tags }}
