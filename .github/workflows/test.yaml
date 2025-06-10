@@ -12,12 +12,12 @@ jobs:
       - uses: actions/checkout@v4
       - shell: bash
         run: |
-          CURR=`cat version`
+          CURR=`cat version || echo 0`
           NEW=`cat model_storage/current`
           [[ $NEW > ${CURR:0} ]] && exit 0
           
           RES=`cargo run --quiet --release --bin=evaluation-test`
-          PREV=`cat accuracy`
+          PREV=`cat accuracy || echo 0`
           [[ $RES > ${PREV:0} ]] && (echo $RES > accuracy) && (echo $NEW > version) || exit 1
       - uses: actions/upload-artifact@v4
         with:
