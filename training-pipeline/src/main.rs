@@ -8,12 +8,12 @@ fn main() {
 
     let device = Default::default();
     let config = TrainingConfig::default()
-        .with_artifact_location("../model_storage".into())
-        .with_output_version(1)
-        .with_epochs(1)
-        .with_batch_size(128)
+        .with_artifact_location("model_storage".into())
+        .with_output_version(2)
+        .with_epochs(5)
+        .with_batch_size(64)
         .with_worker_threads(8)
-        .with_randomizer_seed(15);
+        .with_randomizer_seed(42);
 
     train(device, &config);
 }

@@ -10,14 +10,15 @@ jobs:
     steps:
       - uses: actions/download-artifact@v4
       - uses: actions/checkout@v4
-      - run: |
-          CURR=`cat version`
+      - shell: bash
+        run: |
+          CURR=`cat version || echo 0`
           NEW=`cat model_storage/current`
-          [[ $NEW > CURR ]] && exit 0
+          [[ $NEW > ${CURR:0} ]] && exit 0
           
           RES=`cargo run --quiet --release --bin=evaluation-test`
-          PREV=`cat accuracy`
-          [[ $RES > $PREV ]] && (echo $RES > accuracy) && (echo $NEW > version) || exit 1
+          PREV=`cat accuracy || echo 0`
+          [[ $RES > ${PREV:0} ]] && (echo $RES > accuracy) && (echo $NEW > version) || exit 1
       - uses: actions/upload-artifact@v4
         with:
           name: accuracy
